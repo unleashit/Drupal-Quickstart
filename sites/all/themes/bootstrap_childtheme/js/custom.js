@@ -11,7 +11,7 @@ grunticon([impath + "icons.data.svg.css", impath + "icons.data.png.css", impath 
 Drupal.behaviors.myBehavior = {
   attach: function (context, settings) {
 
-console.log('Jquery running');
+console.log('HELLO!!!!');
 
   }
 };
