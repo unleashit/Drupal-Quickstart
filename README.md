@@ -7,19 +7,11 @@ Simple Drupal starter with useful modules, bootstrap, npm, bower and some helpfu
 
 **Step 1**
 
-Clone the repo, then run:
+Clone the repo, create a new blank database, and install Drupal as usual. 
 
-```drush make basicdrupal.make .```
+Alternatively, using drush: drush site-install standard --account-name=admin --account-pass=admin --db-url=mysql://[db_user]:[db_password]@[db_host]/[db_name]
 
-Note this will install drupal in the root directory. Change the dot to a folder or path as desired. Next create a new blank database, and install Drupal as usual. 
-
-Alternatively, you can use drush to install:
-
-```drush site-install standard --account-name=admin --account-pass=admin --db-url=mysql://[db_user]:[db_password]@[db_host]/[db_name]```
-
-OR for a sqlite database:
-
-```drush site-install standard --account-name=admin --account-pass=admin --db-url=sqlite://sites/default/files/.ht.sqlite```
+or for a sqlite database: drush site-install standard --account-name=admin --account-pass=admin --db-url=sqlite://sites/default/files/.ht.sqlite
 
 **Step 2**
 

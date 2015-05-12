@@ -3,7 +3,7 @@ var bootstrap_path = 'bower_components/bootstrap/',
   bootstrap_jspath = bootstrap_path + 'js/',
   base_theme_path = 'sites/all/themes/'
   theme_path = base_theme_path + 'bootstrap_subtheme/',
-  proxyUrl = "projects.io/sandbox/html-starter"; // important: change this to your server's url or 'false' for no proxy!
+  proxyUrl = "projects.io/sandbox/test"; //false // important: change this to your server's url or 'false' for no proxy!
 
 module.exports = function(grunt) {
     require('time-grunt')(grunt);
@@ -13,9 +13,10 @@ module.exports = function(grunt) {
     copy: {
       main: {
         files: [
-          // copy bootstrap less
+          // create child theme (copy package from bootstrap parent) 
           {expand: true, cwd: base_theme_path + 'bootstrap/bootstrap_subtheme', src: ['**'], dest: theme_path},
-          {expand: true, cwd: bootstrap_csspath, src: ['**'], dest: theme_path + 'bootstrap'},
+          // copy bootstrap less into theme
+          {expand: true, cwd: bootstrap_csspath, src: ['**'], dest: theme_path + 'bootstrap/less'},
         ]
       }
     },
@@ -47,8 +48,8 @@ module.exports = function(grunt) {
              single_file: {
         options: {
           },
-          src: theme_path + 'css/styles.css',
-          dest: theme_path + 'css/prefixed.css'
+          src: theme_path + 'css/style.css',
+          dest: theme_path + 'css/style.css'
         },
       },
     less: {
@@ -60,19 +61,6 @@ module.exports = function(grunt) {
           "sites/all/themes/bootstrap_subtheme/css/style.css": "sites/all/themes/bootstrap_subtheme/less/style.less"
         }
       }
-      // production: {
-      //   options: {
-      //     paths: ["css"],
-      //     cleancss: false,
-      //     modifyVars: {
-      //       imgPath: '"http://mycdn.com/path/to/images"',
-      //       bgColor: 'red'
-      //     }
-      //   },
-      //   files: {
-      //     "css/style.css": "less/style.less"
-      //   }
-      // }
     },
     sass: {
       dist: {
@@ -145,24 +133,32 @@ module.exports = function(grunt) {
                 ext: '.colors-light-danger-success.svg'
             }
         },
-        grunticon: {
-            myIcons: {
-                files: [{
-                    expand: true,
-                    cwd: theme_path + 'images/svg/compressed',
-                    src: ['*.svg', '*.png'],
-                    dest: theme_path + "css"
-                }],
-                options: {
-                  cssprefix: '.icon-',
-                  colors: {
-                  light: '#ccc',
-                  danger: '#ed3921',
-                  success: '#8DC63F'
-                 }
-              }
-            }
-        },
+        // grunticon: {
+        //     myIcons: {
+        //         files: [{
+        //             expand: true,
+        //             cwd: theme_path + 'images/svg/compressed',
+        //             src: ['*.svg', '*.png'],
+        //             dest: theme_path + "css"
+        //         }],
+        //         options: {
+        //           cssprefix: '.icon-',
+        //           colors: {
+        //           light: '#ccc',
+        //           danger: '#ed3921',
+        //           success: '#8DC63F'
+        //          }
+        //       }
+        //     }
+        // },
+    sprite:{
+      all: {
+        src: theme_path + 'images/sprites/*.png',
+        dest: theme_path + 'images/spritesheet.png',
+        destCss: theme_path + 'less/sprites.less',
+        cssVarMap: function (sprite) { sprite.name = 'icon-' + sprite.name;}
+      }
+    },
     watch: {
         scripts: {
             files: [theme_path + 'js/*.js'],
@@ -208,7 +204,7 @@ module.exports = function(grunt) {
 
     grunt.registerTask('firstrun', ['copy', 'less', 'concat', 'uglify']);
 
-    grunt.registerTask('images', ['newer:imagemin', 'newer:svgmin', 'newer:responsive_images', 'newer:sprite', 'newer:grunticon']);
-    grunt.registerTask('build', ['less', 'newer:concat', 'newer:uglify']);
+    grunt.registerTask('images', ['newer:imagemin', 'newer:svgmin', 'newer:responsive_images', 'newer:sprite']);
+    grunt.registerTask('build', ['less', 'autoprefixer', 'newer:concat', 'newer:uglify']);
     grunt.registerTask('default', ["browserSync", "watch"]);
 };
