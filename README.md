@@ -3,7 +3,25 @@ html-starter
 
 Simple HTML starter (html/css/js) with bootstrap, npm, bower and some helpful grunt tasks.
 
-Available Grunt tasks:
+##Installation
+
+**Step 1**
+
+Clone the repo, create a new blank database, and install Drupal as usual. 
+
+Alternatively, using drush: drush site-install standard --account-name=admin --account-pass=admin --db-url=mysql://[db_user]:[db_password]@[db_host]/[db_name]
+
+or for a sqlite database: drush site-install standard --account-name=admin --account-pass=admin --db-url=sqlite://sites/default/files/.ht.sqlite
+
+**Step 2**
+
+Once Drupal is installed, in the following order run:
+
+npm install
+bower install
+grunt firstrun
+
+##Available Grunt tasks
 
 1. Sass
 2. Less
@@ -16,7 +34,7 @@ Available Grunt tasks:
 9. Copy
 3. Watch
 
-Available Grunt commands:
+##Available Grunt commands:
 
 ####Grunt firstinstall
 

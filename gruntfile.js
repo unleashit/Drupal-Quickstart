@@ -1,9 +1,12 @@
 var bootstrap_path = 'bower_components/bootstrap/',
   bootstrap_csspath = bootstrap_path + 'less/',
   bootstrap_jspath = bootstrap_path + 'js/',
-  theme_path = 'sites/all/themes/bootstrap_childtheme/';
+  base_theme_path = 'sites/all/themes/'
+  theme_path = base_theme_path + 'bootstrap_subtheme/',
+  proxyUrl = "projects.io/sandbox/html-starter"; // important: change this to your server's url or 'false' for no proxy!
 
 module.exports = function(grunt) {
+    require('time-grunt')(grunt);
     grunt.initConfig({
         pkg: grunt.file.readJSON('package.json'),
 
@@ -11,7 +14,8 @@ module.exports = function(grunt) {
       main: {
         files: [
           // copy bootstrap less
-          // {expand: true, cwd: bootstrap_csspath, src: ['**'], dest: theme_path + 'bootstrap/'}
+          {expand: true, cwd: base_theme_path + 'bootstrap/bootstrap_subtheme', src: ['**'], dest: theme_path},
+          {expand: true, cwd: bootstrap_csspath, src: ['**'], dest: theme_path + 'bootstrap'},
         ]
       }
     },
@@ -53,7 +57,7 @@ module.exports = function(grunt) {
           paths: ["css"]
         },
         files: {
-          "sites/all/themes/bootstrap_childtheme/css/style.css": "sites/all/themes/bootstrap_childtheme/less/style.less"
+          "sites/all/themes/bootstrap_subtheme/css/style.css": "sites/all/themes/bootstrap_subtheme/less/style.less"
         }
       }
       // production: {
@@ -173,8 +177,7 @@ module.exports = function(grunt) {
             files: [theme_path + 'less/*.less'],
             tasks: ['less'],
             options: {
-            spawn: false,
-            livereload: true
+            spawn: false
             }
         }
     },
@@ -187,12 +190,13 @@ module.exports = function(grunt) {
                       theme_path + '*.php'
                 ]},
                 options: {
+                    proxy: proxyUrl,
                     watchTask: true,
-                    injectChanges: false,
+                    injectChanges: true,
                     ghostMode: {
-                      clicks: false,
+                      clicks: true,
                       scroll: false,
-                      links: false,
+                      links: true,
                       forms: false
                   }
                 }
@@ -200,21 +204,11 @@ module.exports = function(grunt) {
         },
 });
 
-    grunt.loadNpmTasks('grunt-contrib-concat');
-    grunt.loadNpmTasks('grunt-contrib-less');
-    grunt.loadNpmTasks('grunt-contrib-uglify');
-    grunt.loadNpmTasks('grunt-autoprefixer');
-    grunt.loadNpmTasks('grunt-responsive-images');
-    grunt.loadNpmTasks('grunt-contrib-imagemin');
-    grunt.loadNpmTasks('grunt-contrib-watch');
-    grunt.loadNpmTasks('grunt-browser-sync');
-    grunt.loadNpmTasks('grunt-contrib-copy');
-    grunt.loadNpmTasks('grunt-contrib-sass');
-    grunt.loadNpmTasks('grunt-svgmin');
-    grunt.loadNpmTasks('grunt-grunticon');
+    require('load-grunt-tasks')(grunt);
 
-    grunt.registerTask('images', ['responsive_images', 'imagemin']);
-    grunt.registerTask('icons', ['svgmin', 'grunticon']);
-    grunt.registerTask('build', ['less', 'concat', 'uglify']);
-    grunt.registerTask('default', ["watch"]);
+    grunt.registerTask('firstrun', ['copy', 'less', 'concat', 'uglify']);
+
+    grunt.registerTask('images', ['newer:imagemin', 'newer:svgmin', 'newer:responsive_images', 'newer:sprite', 'newer:grunticon']);
+    grunt.registerTask('build', ['less', 'newer:concat', 'newer:uglify']);
+    grunt.registerTask('default', ["browserSync", "watch"]);
 };
