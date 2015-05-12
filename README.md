@@ -1,7 +1,7 @@
-html-starter
+Drupal Starter
 ============
 
-Simple HTML starter (html/css/js) with bootstrap, npm, bower and some helpful grunt tasks.
+Simple Drupal starter with useful modules, bootstrap, npm, bower and some helpful grunt tasks.
 
 ##Installation
 
@@ -20,6 +20,10 @@ Once Drupal is installed, in the following order run:
 npm install
 bower install
 grunt firstrun
+
+##Included Drupal modules
+
+Please see basicdrupal.make file
 
 ##Available Grunt tasks
 
