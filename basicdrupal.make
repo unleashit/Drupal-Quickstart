@@ -11,7 +11,7 @@ projects[better_exposed_filters][subdir] = "contrib"
 projects[block_class][subdir] = "contrib"
 projects[ctools][subdir] = "contrib"
 projects[ckeditor][subdir] = "contrib"
-projects[ckeditor_media][subdir] = "contrib"
+;projects[ckeditor_media][subdir] = "contrib"
 projects[content_type_extras][subdir] = "contrib"
 projects[date][subdir] = "contrib"
 projects[devel][subdir] = "contrib"
@@ -46,7 +46,7 @@ projects[views][subdir] = "contrib"
 projects[views_bootstrap][subdir] = "contrib"
 projects[views_bulk_operations][subdir] = "contrib"
 projects[webform][subdir] = "contrib"
-projects[webform][xmlsitemap] = "contrib"
+projects[xmlsitemap][subdir] = "contrib"
 
 ; Themes
 projects[] = bootstrap

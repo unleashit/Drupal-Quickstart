@@ -29,13 +29,13 @@ Once Drupal is installed, in the following order run:
 2. bower install
 3. grunt copy
 
-Important: to fix a bug in the bootstrap theme, run grunt copy before firstrun. Then open /sites/all/themes/bootstrap_subtheme/less/style.less and add:
+Important: DO NOT run grunt copy except after initial install because the subtheme will be overwritten and you could loose your changes! To fix a bug in the bootstrap theme, after running grunt copy, open /sites/all/themes/bootstrap_subtheme/less/style.less and add:
 
 ```@import "../bootstrap/less/variables.less";```
 
 It must be placed at the top, above bootstrap.less to avoid Less errors. Finally:
 
-<ol start=4><li>grunt firstrun</li></ol>
+<ol start=4><li>grunt build</li></ol>
 
 ####step 3
 
@@ -67,9 +67,9 @@ Please see basicdrupal.make file. Note that non-core modules will not be enabled
 
 ##Available Grunt commands:
 
-####Grunt firstinstall
+####Grunt copy
 
-```Use when first cloning repo. Runs Copy, Less, Concat and Uglify```
+```Use when first cloning repo (do not run again unless you know what you are doing). Creates Bootstrap childtheme and adds Bootstrap less sources.```
 
 ####Grunt build
 

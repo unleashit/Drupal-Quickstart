@@ -202,8 +202,6 @@ module.exports = function(grunt) {
 
     require('load-grunt-tasks')(grunt);
 
-    grunt.registerTask('firstrun', ['copy', 'less', 'concat', 'uglify']);
-
     grunt.registerTask('images', ['newer:imagemin', 'newer:svgmin', 'newer:responsive_images', 'newer:sprite']);
     grunt.registerTask('build', ['less', 'autoprefixer', 'newer:concat', 'newer:uglify']);
     grunt.registerTask('default', ["browserSync", "watch"]);
