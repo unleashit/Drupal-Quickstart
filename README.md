@@ -81,4 +81,4 @@ Please see basicdrupal.make file. Note that non-core modules will not be enabled
 
 ####Grunt
 
-```Use during development. Turns on BrowserSync for live reloading, compiles Less as a watch task```
+```Use during development. Turns on BrowserSync for live reloading, compiles Less as a watch task. To use live reloading, you must either place the browserSync script tag in html.tpl.php or (better) add your local server (proxy) to the gruntfile.```
