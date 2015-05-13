@@ -43,7 +43,7 @@ To use the bootstrap theme, you must first rename bootstrap_subtheme.info.starte
 
 ```scripts[] = 'js/scripts.min.js'```
 
-inside it if you want to use Bootstrap js or any custom js. Finally enable the Bootstrap child theme within Drupal!
+inside it if you want to use Bootstrap js or any custom js. Finally enable the Bootstrap child theme within Drupal! Note the Bootstrap theme uses a CDN by default, so you should disable in theme settings if you want to use and customize your own sources.  
 
 ##Included Drupal modules
 
