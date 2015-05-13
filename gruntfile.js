@@ -1,9 +1,9 @@
 var bootstrap_path = 'bower_components/bootstrap/',
-  bootstrap_csspath = bootstrap_path + 'less/',
-  bootstrap_jspath = bootstrap_path + 'js/',
-  base_theme_path = 'sites/all/themes/'
-  theme_path = base_theme_path + 'bootstrap_subtheme/',
-  proxyUrl = "projects.io/sandbox/test"; //false // important: change this to your server's url or 'false' for no proxy!
+    bootstrap_csspath = bootstrap_path + 'less/',
+    bootstrap_jspath = bootstrap_path + 'js/',
+    base_theme_path = 'sites/all/themes/',
+    theme_path = base_theme_path + 'bootstrap_subtheme/',
+    proxyUrl = false; // change this to your server's url or use 'false' for no proxy
 
 module.exports = function(grunt) {
     require('time-grunt')(grunt);
@@ -16,7 +16,7 @@ module.exports = function(grunt) {
           // create child theme (copy package from bootstrap parent) 
           {expand: true, cwd: base_theme_path + 'bootstrap/bootstrap_subtheme', src: ['**'], dest: theme_path},
           // copy bootstrap less into theme
-          {expand: true, cwd: bootstrap_csspath, src: ['**'], dest: theme_path + 'bootstrap/less'},
+          {expand: true, cwd: bootstrap_csspath, src: ['**'], dest: theme_path + 'bootstrap/less'}
         ]
       }
     },
@@ -38,7 +38,7 @@ module.exports = function(grunt) {
                 bootstrap_jspath + 'affix.js',
                 theme_path + 'js/custom.js' // This specific file
             ],
-            dest: theme_path + 'js/scripts.js',
+            dest: theme_path + 'js/scripts.js'
         }
     },
     autoprefixer: {
@@ -50,7 +50,7 @@ module.exports = function(grunt) {
           },
           src: theme_path + 'css/style.css',
           dest: theme_path + 'css/style.css'
-        },
+        }
       },
     less: {
       development: {
@@ -108,7 +108,7 @@ module.exports = function(grunt) {
     imagemin: {
         dynamic: {
             options: {
-                optimizationLevel: 4,
+                optimizationLevel: 4
             },
             files: [{
                 expand: true,
@@ -197,7 +197,7 @@ module.exports = function(grunt) {
                   }
                 }
             }
-        },
+        }
 });
 
     require('load-grunt-tasks')(grunt);
